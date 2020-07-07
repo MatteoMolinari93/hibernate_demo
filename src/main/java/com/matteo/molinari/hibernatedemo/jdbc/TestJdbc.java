@@ -1,4 +1,4 @@
-package com.matteo.molinari.jdbc;
+package com.matteo.molinari.hibernatedemo.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
