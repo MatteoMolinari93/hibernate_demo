@@ -21,7 +21,7 @@ public class InstructorDetailDemo {
 		try {
 			session.beginTransaction();
 
-			int id = 1;
+			int id = 23423;
 			InstructorDetail instructorDetail = session.get(InstructorDetail.class, id);
 			
 			System.out.println("instructorDetail: " + instructorDetail);
@@ -30,6 +30,7 @@ public class InstructorDetailDemo {
 			session.getTransaction().commit();
 			System.out.println("Done.");
 		} finally {
+			session.close();
 			factory.close();
 		}
 	}
