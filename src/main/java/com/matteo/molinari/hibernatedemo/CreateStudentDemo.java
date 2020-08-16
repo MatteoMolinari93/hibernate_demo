@@ -4,30 +4,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.matteo.molinari.hibernatedemo.entity.Instructor;
-import com.matteo.molinari.hibernatedemo.entity.InstructorDetail;
+import com.matteo.molinari.hibernatedemo.entity.Student;
 
 public class CreateStudentDemo {
 
 	public static void main(String[] args) {
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InstructorDetail.class)
-				.buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class).buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
 
 		try {
-			System.out.println("Creating new Instructor object...");
-			Instructor instructor = new Instructor("Paul", "Laup","lauppaul@test.com");
-			InstructorDetail instructorDetail = new InstructorDetail("http://youtube", "Coding");
-			
-			instructor.setDetail(instructorDetail);
+			System.out.println("Creating new Student object...");
+			Student student = new Student("Paul", "Laup","lauppaul@test.com");
 			
 			session.beginTransaction();
-			System.out.println("Saving instructor: " + instructor);
-			session.save(instructor);
+			System.out.println("Saving the student...");
+			session.save(student);
 			session.getTransaction().commit();
 			System.out.println("Done.");
 		} finally {

@@ -8,7 +8,7 @@ import com.matteo.molinari.hibernatedemo.entity.Course;
 import com.matteo.molinari.hibernatedemo.entity.Instructor;
 import com.matteo.molinari.hibernatedemo.entity.InstructorDetail;
 
-public class CreateInstructorDemo {
+public class CreateCoursesDemo {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration()
@@ -20,21 +20,18 @@ public class CreateInstructorDemo {
 		
 		Session session = factory.getCurrentSession();
 
-		try {			
+		try {
+			System.out.println("Creating new Instructor object...");
+			Instructor instructor = new Instructor("you", "me","they@test.com");
+			InstructorDetail instructorDetail = new InstructorDetail("http://youtube", "Videogames");
+			
+			instructor.setDetail(instructorDetail);
+			
 			session.beginTransaction();
-			
-			int instructorId = 1;
-			Instructor instructor = session.get(Instructor.class, instructorId);
-			
-			Course course1 = new Course("Air Guitar");
-			Course course2 = new Course("Pinball");
-			
-			instructor.add(course1);
-			instructor.add(course2);
-			
-			session.save(course1);
-			session.save(course2);
+			System.out.println("Saving instructor: " + instructor);
+			session.save(instructor);
 			session.getTransaction().commit();
+			System.out.println("Done.");
 		} finally {
 			session.close();
 			factory.close();
